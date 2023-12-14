@@ -19,7 +19,8 @@ public class UserController {
   /**
    * ユーザー情報 Service
    */
-  private UserService userService;
+  	
+  private final UserService userService;
   /**
    * ユーザー情報一覧画面を表示
    * @param model Model

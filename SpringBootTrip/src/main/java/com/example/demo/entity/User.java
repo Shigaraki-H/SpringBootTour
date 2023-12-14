@@ -58,18 +58,25 @@ public class User {
 	private String phone;
 	
 	/*
+	 * 作成日時
+	 */
+	
+	@Column(name ="create_date")
+	private Date createDate;
+	
+	/*
 	 * 更新日時
 	 */
 	
 	@Column(name ="update_date")
-	private String updateDate;
+	private Date updateDate;
 	
 	/*
 	 * 削除日時
 	 */
 	
-	@Column(name ="dalete_date")
-	private String deleteDate;
+	@Column(name ="delete_date")
+	private Date deleteDate;
 
 
 }
