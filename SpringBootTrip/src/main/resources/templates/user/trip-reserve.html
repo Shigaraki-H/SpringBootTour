@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="/css/calendar.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>GeekGatherGuideing</title>
+</head>
+<body>
+<header><a href="/"><img th:src="@{/img/GGG_logo.jpg}" width="85" height="85"></a></header>
+<div>こちらの画面からオプションの有無を選択し、予約希望日時を選択してください。</div>
+
+<div><p>（音声ガイド（ガイドなし）※１名予約のみ）</p></div>
+<div><p>聖地巡礼のみ</p></div>
+<div><p>グルメスポットのみ</p></div>
+<div><p>アミューズメントのみ</p></div>
+
+<div class="reserve-calendar-title"><p>予約日時を選択</p></div>
+
+<form th:action="@{/user/inputReserveView} th:method="post" th:object="これから入れる予定">
+
+<div class="reserve-calendar-view">
+
+	<div id="calendar" class="calendar-wrap"></div>
+	<button id="prev">←</button>
+    <button id="next">→</button>
+
+</div>
+
+<div class = topUrl><a href="/">TOPへ戻る</a></div>
+<script type="text/javascript" src="js/calendar.js" th:src="@{/js/calendar.js}"></script>
+</body>
+</html>

@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link href="/css/top.css" rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert tit  here</title>
+<title>GeekGatherGuideing</title>
 </head>
 <body>
+<header><a href="/"><img th:src="@{/img/GGG_logo.jpg}" width="85" height="85"></a></header>
+<div class="authlogin">スタッフログイン</div>
 	<h1>Spring Boot + thymeleaf　で "Hello world"を作成するよ！</h1>
 	<h2><span th:text ="${message}"></span></h2>
+	
+	<div class=window-image><img th:src="@{/img/TopImage.jpg}" height="425" width=625></img></div>
+	<div><p class ="concept">秋葉原を堪能しよう！</p></div>
+	
+	<div class="reserve-button"><a th:href="@{/user/tripReserve}" class="reserve-line">予約</a></div>
+	
+	<div>プラン</div>
+	<p>対象年齢：１グループ７名まで</p>
+	<p>料金：4,800円/人</p>
+	<p>所要時間:1.5時間</p>
+	<p>対応ガイド：英語、中国語</p>
+	<p>出発および解散場所：対応ガイドによる</p>
+	<p>ヘルプ</p>
 </body>
 </html>

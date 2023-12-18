@@ -1,0 +1,27 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+}
+.authlogin {
+    text-align: right;
+    margin-bottom: 20px;
+}
+.window-image {
+    text-align: center;
+}
+.concept {
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+}
+.reserve-button {
+    text-align: center;
+    margin: 20px 0;
+}
+.reserve-line {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    text-decoration: none;
+}

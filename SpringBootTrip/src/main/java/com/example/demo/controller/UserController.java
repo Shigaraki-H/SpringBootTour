@@ -32,4 +32,24 @@ public class UserController {
     model.addAttribute("userlist", userlist);
     return "user/list";
   }
+  
+  /*
+   * 予約画面の空き状況を表示
+   */
+  
+  @RequestMapping(value = "/user/tripReserve", method = RequestMethod.GET)
+  public String showReserve(Model model) {
+    
+    return "user/trip-reserve";
+  }
+  
+  /*
+   * 予約情報入力画面を表示
+   */
+  
+  @RequestMapping(value = "/user/inputReserveView", method = RequestMethod.GET)
+  public String showReserveInfo(Model model) {
+    
+    return "user/inputReserveView";
+  }
 }                  
