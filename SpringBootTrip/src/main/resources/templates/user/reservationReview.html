@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+<link href="/css/top.css" rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>GeekGatherGuideing</title>
 </head>
 <body>
+<header><a href="/"><img th:src="@{/img/GGG_logo.jpg}" width="85" height="85"></a></header>
+<div class="reserveReview-board">
+<h2>予約確認</h2>
+<p>以下の内容で登録します</p>
+<div class="reserveReview-box">
+<form th:action="@{/user/reserveCompleted}" th:method="post">
 
+<div th:each="attr : ${attributes}">
+    <p th:text="${attr.key} + ': ' + ${attr.value}"></p>
+</div>
+
+<button type="submit">予約確定</button>
+
+<!-- フォームの終了 -->
+</form>
+
+<div class="reserve-button"><a th:href="@{/user/tripReserve}" class="reserve-line">予約日へ戻る</a></div>
+</div>
+</div>
 </body>
 </html>

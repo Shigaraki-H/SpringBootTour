@@ -1,20 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+<link href="/css/top.css" rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>GeekGatherGuideing</title>
 </head>
 <body>
+<header><a href="/"><img th:src="@{/img/GGG_logo.jpg}" width="85" height="85"></a></header>
 
 <div class = "contents-box">
 <div>
+<div th:if="${validationError}" th:each="error : ${validationError}">
+      <label class="text-danger" th:text="${error}"></label>
+</div>
 <h2>ガイド予約</h2>
-<p>first name</p>
-<p>last name</p>
-<p>phone</p>
-<p>number of people</p>
-<p>desired time</p>
-<p>mail</p>
+
+<form th:action="@{/user/reserveReview}" th:object="${reservationListRequest}" th:method="post">
+<div class="form-group">
+<p>
+  <label class="control-label" for="inputTextarea1">first name</label>
+  <textarea rows="3" cols="80" class="form-control" id="inputTextarea" name="first-name" th:field="*{firstName}"></textarea>
+</p>
+</div>
+
+<div class="form-group">
+<p>
+  <label class="control-label" for="inputTextarea1">last name</label>
+  <textarea rows="3" cols="80" class="form-control" id="inputTextarea" name="last-name" th:field="*{lastName}"></textarea>
+</p>
+</div>
+
+<div class="form-group">
+<p>
+<label class="control-label" for="inputTextarea1">birth day</label>
+  <select class="dropdown control-label" name="birthYear" th:field="*{birthYear}">
+  <th:block th:each="i : ${#numbers.sequence(1930,2023)}">
+	<option th:value="${i}" th:text="${i}"></option>
+  </th:block>
+  </select>
+  <select class="dropdown control-label" name="birthMonth" th:field="*{birthMonth}">
+  <th:block th:each="i : ${#numbers.sequence(1,12)}">
+	<option th:value="${i}" th:text="${i}"></option>
+  </th:block>
+  </select>
+  <select class="dropdown control-label" name="birthDay" th:field="*{birthDay}">
+  <th:block th:each="i : ${#numbers.sequence(1,31)}">
+	<option th:value="${i}" th:text="${i}"></option>
+  </th:block>
+  </select>
+</p>
+</div>
+
+<div class="form-group">
+<p>
+  <label class="control-label" for="gender" th:field="*{gender}">性別</label>
+  <input type="radio" id="gender1" name="gender" value="1"><label for="gender1">男性</label>
+  <input type="radio" id="gender2" name="gender" value="2"><label for="gender2">女性</label>
+  <input type="radio" id="gender3" name="gender" value="3"><label for="gender3">未回答</label>
+</p>
+</div>
+
+<div class="form-group">
+<p>
+  <label class="control-label" for="inputTextarea1">phone</label>
+  <textarea rows="3" cols="80" class="form-control" id="inputTextarea" name="phone"></textarea>
+</p>
+</div>
+
+
+<div class="form-group">
+<p>
+<label class="control-label" for="inputTextarea1">number of people</label>
+  <select class="dropdown control-label" th:field="*{numberOfPeople}">
+  <th:block th:each="i : ${#numbers.sequence(1,20)}">
+	<option th:value="${i}" th:text="${i}"></option>
+  </th:block>
+  </select>
+</p>
+</div>
+
+
+<div class="form-group">
+<p>
+  <label class="control-label" for="inputTextarea1" th:field="*{reserveTime}">Desired time</label>
+	<input type="radio" id="time1130" name="desire-time" th:value="'11:30-'"><label th:for="time1130" th:text="'11:30-'"></label>
+	<input type="radio" id="time1430" name="desire-time" th:value="'14:30-'"><label th:for="time1430" th:text="'14:30-'"></label>
+	<input type="radio" id="time1730" name="desire-time" th:value="'17:30-'"><label th:for="time1730" th:text="'17:30-'"></label>
+</p>
+</div>
+
+
+
+
+<div class="form-group">
+<p>
+  <label class="control-label" for="inputTextarea1">mail</label>
+  <textarea rows="3" cols="80" class="form-control" id="inputTextarea" th:field="*{mail}"></textarea>
+</p>
+</div>
+
+<button type="submit">確認画面へ</button>
+
+<!-- フォームの終了 -->
+</form>
 </div>
 </div>
 
