@@ -82,11 +82,13 @@ public class UserController {
 		  @ModelAttribute("gender") Integer gender,
 		  @ModelAttribute("phone") String phone,
 		  @ModelAttribute("numberOfPeople") Integer numberOfPeople,
+		  @ModelAttribute("year") String year,
+		  @ModelAttribute("month") String month,
+		  @ModelAttribute("day") String day,
 		  @ModelAttribute("reserveTime") String reserveTime,
 		  @ModelAttribute("mail") String mail) {
 	Map<String,Object> attributes = new HashMap<>();
 	Date birth_day = new Date(); // birth_dayを適切な値で初期化
-	attributes.put(birthYear + "" + birthMonth + "" + birthDay, birth_day);
 
 	attributes.put("firstName", firstName);
     attributes.put("lastName", lastName);
@@ -94,6 +96,9 @@ public class UserController {
     attributes.put("gender", gender);
     attributes.put("phone", phone);
     attributes.put("numberOfPeople", numberOfPeople);
+    attributes.put("year", year);
+    attributes.put("month", month);
+    attributes.put("day", day);
     attributes.put("reserveTime", reserveTime);
     attributes.put("mail", mail);
 
