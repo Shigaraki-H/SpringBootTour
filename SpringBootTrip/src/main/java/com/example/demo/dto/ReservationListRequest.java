@@ -51,6 +51,13 @@ public class ReservationListRequest implements Serializable{
   /**
    * 予約日
    */
+  
+  private String year;
+  
+  private String month;
+  
+  private String day;
+  
   private String reserveTime;
   
   /**

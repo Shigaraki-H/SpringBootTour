@@ -47,7 +47,7 @@ public class ReservationLists {
 	private String last_name;
 	
 	/*
-	 * 住所
+	 * 誕生日
 	 */
 	
 	private Date birth_day;

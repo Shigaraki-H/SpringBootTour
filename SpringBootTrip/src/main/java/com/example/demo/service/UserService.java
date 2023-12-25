@@ -3,8 +3,9 @@ package com.example.demo.service;
 
 
 
+import java.util.Date;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 
 import lombok.RequiredArgsConstructor;
 import java.lang.IllegalAccessException;
+import java.text.SimpleDateFormat;
 
 
 
@@ -60,11 +62,61 @@ public class UserService {
     }
     
     @Transactional
-    public void makeReserve(ReservationListRequest rlreq,Model model) {
+    public ReservationLists makeReserve(ReservationListRequest rlreq,Model model) throws Exception {
     	try {
+    		
+    		//Beanの(Dozer.mapper)を使うともっと短く書けるらしい
     	
-    	ReservationLists reservation = new ReservationLists();
-    	rlrep.save(reservation);
+		    	var reservationLists = new ReservationLists();
+		    	
+		    	//DateFormat型の雛形を用意(誕生日)
+		    	SimpleDateFormat birthsdf = new SimpleDateFormat("yyyy/MM/dd");
+		         
+		        SimpleDateFormat reserveDateSdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		    	
+		    	
+		    	 // rlreqから値を取得してreservationに設定
+		    	reservationLists.setFirst_name(rlreq.getFirstName());
+		    	reservationLists.setLast_name(rlreq.getLastName());
+		    	
+		    	String birthYear = String.valueOf(rlreq.getBirthYear());
+		    	String birthMonth = String.valueOf(rlreq.getBirthMonth());
+		    	String birthDay = String.valueOf(rlreq.getBirthDay());
+		    	
+		    	//getし誕生日を文字列結合させる
+		    	String birthStrDate = birthYear+"/"+birthMonth+"/"+birthDay;
+		    	
+		    	Date birthDate = birthsdf.parse(birthStrDate);
+		    	
+		    	reservationLists.setBirth_day(birthDate);
+		    	
+		    	reservationLists.setSex(rlreq.getGender());
+		    	
+		    	reservationLists.setPhone(rlreq.getPhone());
+		    	
+		    	reservationLists.setNumber_of_people(rlreq.getNumberOfPeople());
+		    	
+		    	reservationLists.setPhone(rlreq.getPhone());
+		    	
+		    	String reserveYear = rlreq.getYear();
+		    	
+		    	String reserveMonth = rlreq.getMonth();
+		    	
+		    	String reserveDay = rlreq.getDay();
+		    	
+		    	String reserveTime = rlreq.getReserveTime();
+		    	
+		    	String reserveStrDate = reserveYear+"/"+reserveMonth+"/"+reserveDay+""+reserveTime;
+		    	
+		    	Date reserveDate = reserveDateSdf.parse(reserveStrDate);
+		    	
+		    	reservationLists.setReserve_date(reserveDate);
+		    	
+		    	reservationLists.setMail(rlreq.getMail());
+		        
+		    	return rlrep.save(reservationLists);
+    	
+    	
     	} catch (Exception e) {
     		// 処理に失敗した場合の処理
             if (e.getMessage() != null) {
@@ -72,7 +124,10 @@ public class UserService {
             } else {
                  model.addAttribute("message", "sql文でエラーが発生しました。");
             }
+            throw e;  // 例外を再スロー
     	}
+    	
+    	
 
     }
 }

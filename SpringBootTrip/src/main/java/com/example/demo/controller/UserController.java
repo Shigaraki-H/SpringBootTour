@@ -71,7 +71,9 @@ public class UserController {
   }
   
   
-  
+  /*
+   * 確認画面ページに値を送信
+   */
   @RequestMapping(value = "/user/reserveReview", method = RequestMethod.POST)
   public String postReserveInfo(Model model,
 		  @ModelAttribute("firstName") String firstName, 
@@ -106,8 +108,8 @@ public class UserController {
     return "user/reservationReview";
   }
   
-  @RequestMapping(value = "/user/reservationReview", method = RequestMethod.POST)
-  public String makeReserve(@Validated @ModelAttribute ReservationListRequest reservationListRequest, BindingResult result, Model model) {
+  @RequestMapping(value = "/user/reserveCompleted", method = RequestMethod.POST)
+  public String makeReserve(@Validated @ModelAttribute ReservationListRequest reservationListRequest, BindingResult result, Model model) throws Exception {
 	  
 	  if(result.hasErrors()) {
 		  List<String> errorList = new ArrayList<String>();
@@ -118,7 +120,10 @@ public class UserController {
 		  
 		  return "user/inputReserveView";
 	  }
+	  
+	  //登録処理のメソッド
 	  userService.makeReserve(reservationListRequest, model);
+	  
     return "user/reservationReview";
   }
   
