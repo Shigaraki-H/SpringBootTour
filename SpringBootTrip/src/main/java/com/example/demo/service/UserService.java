@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 
 import lombok.RequiredArgsConstructor;
 import java.lang.IllegalAccessException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
@@ -62,8 +63,8 @@ public class UserService {
     }
     
     @Transactional
-    public ReservationLists makeReserve(ReservationListRequest rlreq,Model model) throws Exception {
-    	try {
+    public ReservationLists makeReserve(ReservationListRequest rlreq,Model model) {
+    	
     		
     		//Beanの(Dozer.mapper)を使うともっと短く書けるらしい
     	
@@ -72,7 +73,7 @@ public class UserService {
 		    	//DateFormat型の雛形を用意(誕生日)
 		    	SimpleDateFormat birthsdf = new SimpleDateFormat("yyyy/MM/dd");
 		         
-		        SimpleDateFormat reserveDateSdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		        SimpleDateFormat reserveDateSdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		    	
 		    	
 		    	 // rlreqから値を取得してreservationに設定
@@ -84,19 +85,7 @@ public class UserService {
 		    	String birthDay = String.valueOf(rlreq.getBirthDay());
 		    	
 		    	//getし誕生日を文字列結合させる
-		    	String birthStrDate = birthYear+"/"+birthMonth+"/"+birthDay;
-		    	
-		    	Date birthDate = birthsdf.parse(birthStrDate);
-		    	
-		    	reservationLists.setBirth_day(birthDate);
-		    	
-		    	reservationLists.setSex(rlreq.getGender());
-		    	
-		    	reservationLists.setPhone(rlreq.getPhone());
-		    	
-		    	reservationLists.setNumber_of_people(rlreq.getNumberOfPeople());
-		    	
-		    	reservationLists.setPhone(rlreq.getPhone());
+		    	String birthStrDate = birthYear + "/" + birthMonth + "/" + birthDay;
 		    	
 		    	String reserveYear = rlreq.getYear();
 		    	
@@ -105,27 +94,46 @@ public class UserService {
 		    	String reserveDay = rlreq.getDay();
 		    	
 		    	String reserveTime = rlreq.getReserveTime();
+		    	String reserveStrDate = reserveYear+"/"+reserveMonth+"/"+reserveDay+" "+reserveTime+":00";
 		    	
-		    	String reserveStrDate = reserveYear+"/"+reserveMonth+"/"+reserveDay+""+reserveTime;
+		    	try {
+		    	    Date birthDate = birthsdf.parse(birthStrDate);
+		    	    
+		    	    reservationLists.setBirth_day(birthDate);
+		    	} catch (ParseException e) {
+		    	    e.printStackTrace();
+		    	}
+
 		    	
-		    	Date reserveDate = reserveDateSdf.parse(reserveStrDate);
+		    	reservationLists.setSex(rlreq.getGender());
 		    	
-		    	reservationLists.setReserve_date(reserveDate);
+		    	reservationLists.setPhone(rlreq.getPhone());
+		    	
+		    	
+		    	reservationLists.setNumber_of_people(rlreq.getNumberOfPeople());
+		    	
+		    	reservationLists.setPhone(rlreq.getPhone());
+		    	
+		    	
+		    	
+		    	
+		    	try {
+		    		Date reserveDate = reserveDateSdf.parse(reserveStrDate);
+		    	    reservationLists.setReserve_date(reserveDate);
+		    	} catch (ParseException e) {
+		    	    e.printStackTrace();
+		    	}
+		    	
 		    	
 		    	reservationLists.setMail(rlreq.getMail());
+		    	
+		    	Date now = new Date();
+		    	reservationLists.setCreateDate(now);
 		        
 		    	return rlrep.save(reservationLists);
     	
     	
-    	} catch (Exception e) {
-    		// 処理に失敗した場合の処理
-            if (e.getMessage() != null) {
-                 model.addAttribute("message", e.getMessage());
-            } else {
-                 model.addAttribute("message", "sql文でエラーが発生しました。");
-            }
-            throw e;  // 例外を再スロー
-    	}
+    	
     	
     	
 

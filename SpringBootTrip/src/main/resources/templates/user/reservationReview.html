@@ -11,12 +11,23 @@
 <h2>予約確認</h2>
 <p>以下の内容で登録します</p>
 <div class="reserveReview-box">
-<form th:action="@{/user/reserveCompleted}" th:method="post">
-
 <div th:each="attr : ${attributes}">
-    <p th:text="${attr.key} + ': ' + ${attr.value}"></p>
+	<p th:text="${attr.key} + ': ' + ${attr.value}"></p>
 </div>
-
+<form th:action="@{/user/reserveCompleted}" th:object="${reservationListRequest}" th:method="post">
+<input type="hidden" name="firstName" th:value="${firstName}">
+<input type="hidden" name="lastName" th:value="${lastName}">
+<input type="hidden" name="birthYear" th:value="${birthYear}">
+<input type="hidden" name="birthMonth" th:value="${birthMonth}">
+<input type="hidden" name="birthDay" th:value="${birthDay}">
+<input type="hidden" name="gender" th:value="${gender}">
+<input type="hidden" name="phone" th:value="${phone}">
+<input type="hidden" name="NumberOfPeople" th:value="${numberOfPeople}">
+<input type="hidden" name="year" th:value="${year}">
+<input type="hidden" name="month" th:value="${month}">
+<input type="hidden" name="day" th:value="${day}">
+<input type="hidden" name="reserveTime" th:value="${reserveTime}">
+<input type="hidden" name="mail" th:value="${mail}">
 <button type="submit">予約確定</button>
 
 <!-- フォームの終了 -->

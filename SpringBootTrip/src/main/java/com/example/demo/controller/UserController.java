@@ -90,11 +90,13 @@ public class UserController {
 		  @ModelAttribute("reserveTime") String reserveTime,
 		  @ModelAttribute("mail") String mail) {
 	Map<String,Object> attributes = new HashMap<>();
-	Date birth_day = new Date(); // birth_dayを適切な値で初期化
+	
 
 	attributes.put("firstName", firstName);
     attributes.put("lastName", lastName);
-    attributes.put(String.valueOf(birthYear) +"/"+ String.valueOf(birthMonth) +"/"+ String.valueOf(birthDay), birth_day);
+    attributes.put("birthYear",birthYear);
+    attributes.put("birthMonth",birthMonth);
+    attributes.put("birthDay",birthDay);
     attributes.put("gender", gender);
     attributes.put("phone", phone);
     attributes.put("numberOfPeople", numberOfPeople);
@@ -109,7 +111,7 @@ public class UserController {
   }
   
   @RequestMapping(value = "/user/reserveCompleted", method = RequestMethod.POST)
-  public String makeReserve(@Validated @ModelAttribute ReservationListRequest reservationListRequest, BindingResult result, Model model) throws Exception {
+  public String makeReserve(@Validated @ModelAttribute ReservationListRequest reservationListRequest, BindingResult result, Model model) {
 	  
 	  if(result.hasErrors()) {
 		  List<String> errorList = new ArrayList<String>();
@@ -124,7 +126,7 @@ public class UserController {
 	  //登録処理のメソッド
 	  userService.makeReserve(reservationListRequest, model);
 	  
-    return "user/reservationReview";
+    return "user/reserveCompleted";
   }
   
 }                  
