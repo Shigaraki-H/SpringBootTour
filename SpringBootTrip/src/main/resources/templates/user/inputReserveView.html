@@ -35,17 +35,17 @@
 <label class="control-label" for="inputTextarea1">birth day</label>
   <select class="dropdown control-label" name="birthYear" th:field="*{birthYear}">
   <th:block th:each="i : ${#numbers.sequence(1930,2023)}">
-	<option th:value="${i}" th:text="${i}"></option>
+	<option th:value="${i}" th:text="${i}" required></option>
   </th:block>
   </select>
   <select class="dropdown control-label" name="birthMonth" th:field="*{birthMonth}">
   <th:block th:each="i : ${#numbers.sequence(1,12)}">
-	<option th:value="${i}" th:text="${i}"></option>
+	<option th:value="${i}" th:text="${i}" required></option>
   </th:block>
   </select>
   <select class="dropdown control-label" name="birthDay" th:field="*{birthDay}">
   <th:block th:each="i : ${#numbers.sequence(1,31)}">
-	<option th:value="${i}" th:text="${i}"></option>
+	<option th:value="${i}" th:text="${i}" required></option>
   </th:block>
   </select>
 </p>
@@ -54,9 +54,9 @@
 <div class="form-group">
 <p>
   <label class="control-label" for="gender" th:field="*{gender}">性別</label>
-  <input type="radio" id="gender1" name="gender" value="1"><label for="gender1">男性</label>
-  <input type="radio" id="gender2" name="gender" value="2"><label for="gender2">女性</label>
-  <input type="radio" id="gender3" name="gender" value="3"><label for="gender3">未回答</label>
+  <input type="radio" id="gender1" name="gender" value="1" required><label for="gender1">男性</label>
+  <input type="radio" id="gender2" name="gender" value="2" required><label for="gender2">女性</label>
+  <input type="radio" id="gender3" name="gender" value="3" required><label for="gender3">未回答</label>
 </p>
 </div>
 

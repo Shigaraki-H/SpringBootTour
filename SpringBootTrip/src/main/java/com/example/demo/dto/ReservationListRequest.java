@@ -63,5 +63,6 @@ public class ReservationListRequest implements Serializable{
   /**
    * メール
    */
+  @Pattern(regexp = "^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$", message = "メールアドレスの形式が正しくありません")
   private String mail;
 }
