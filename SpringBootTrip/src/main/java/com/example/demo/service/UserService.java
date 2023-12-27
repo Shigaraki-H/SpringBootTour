@@ -58,9 +58,7 @@ public class UserService {
         return userRepository.findAll();
     }
     
-    public List<ReservationLists> reviewInfo(){
-    	return rlrep.findAll();
-    }
+    
     
     @Transactional
     public ReservationLists makeReserve(ReservationListRequest rlreq,Model model) {
@@ -77,8 +75,8 @@ public class UserService {
 		    	
 		    	
 		    	 // rlreqから値を取得してreservationに設定
-		    	reservationLists.setFirst_name(rlreq.getFirstName());
-		    	reservationLists.setLast_name(rlreq.getLastName());
+		    	reservationLists.setFirstName(rlreq.getFirstName());
+		    	reservationLists.setLastName(rlreq.getLastName());
 		    	
 		    	String birthYear = String.valueOf(rlreq.getBirthYear());
 		    	String birthMonth = String.valueOf(rlreq.getBirthMonth());
@@ -99,7 +97,7 @@ public class UserService {
 		    	try {
 		    	    Date birthDate = birthsdf.parse(birthStrDate);
 		    	    
-		    	    reservationLists.setBirth_day(birthDate);
+		    	    reservationLists.setBirthDay(birthDate);
 		    	} catch (ParseException e) {
 		    	    e.printStackTrace();
 		    	}
@@ -110,7 +108,7 @@ public class UserService {
 		    	reservationLists.setPhone(rlreq.getPhone());
 		    	
 		    	
-		    	reservationLists.setNumber_of_people(rlreq.getNumberOfPeople());
+		    	reservationLists.setNumberOfPeople(rlreq.getNumberOfPeople());
 		    	
 		    	reservationLists.setPhone(rlreq.getPhone());
 		    	
@@ -119,7 +117,7 @@ public class UserService {
 		    	
 		    	try {
 		    		Date reserveDate = reserveDateSdf.parse(reserveStrDate);
-		    	    reservationLists.setReserve_date(reserveDate);
+		    	    reservationLists.setReserveDate(reserveDate);
 		    	} catch (ParseException e) {
 		    	    e.printStackTrace();
 		    	}

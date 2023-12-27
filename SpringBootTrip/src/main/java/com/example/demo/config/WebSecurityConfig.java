@@ -15,12 +15,11 @@ public class WebSecurityConfig {
 	
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		/*
-		 * ログイン先はリダイレクトされるようにgetメソッド（自分が定義したもの）が動く
-		 */
 		http
 			.authorizeHttpRequests(
-				authorize -> authorize.requestMatchers("/", "/staffLogin","/user/tripReserve","/user/reserveReview","/user/inputReserveView/**","/user/reserveCompleted","/css/**","/img/**","/js/**").permitAll()
+				authorize -> authorize
+					.requestMatchers("/", "/staffLogin","/user/tripReserve","/user/reserveReview","/user/inputReserveView/**","/user/reserveCompleted","/css/**","/img/**","/js/**").permitAll()
+					.requestMatchers("/search/desc","/search/asc","/search/**").authenticated()
 					.anyRequest().authenticated())
 			.formLogin(
 				login -> login.loginPage("/staffLogin")
@@ -31,3 +30,5 @@ public class WebSecurityConfig {
 	}
 
 }
+
+

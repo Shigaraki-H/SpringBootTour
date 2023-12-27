@@ -40,17 +40,21 @@ public class ReservationLists {
 	 * 名前
 	 */
 	
-	private String first_name;
+	@Column(name ="first_name")
+	private String firstName;
 	
-	private String middle_name;
+	@Column(name ="middle_name")
+	private String middleName;
 	
-	private String last_name;
+	@Column(name ="last_name")
+	private String lastName;
 	
 	/*
 	 * 誕生日
 	 */
 	
-	private Date birth_day;
+	@Column(name ="birth_day")
+	private Date birthDay;
 	
 	/*
 	 * 性別
@@ -68,13 +72,15 @@ public class ReservationLists {
 	 * 人数
 	 */
 	
-	private int number_of_people;
+	@Column(name ="number_of_people")
+	private int numberOfPeople;
 	
 	/*
 	 * 予約日
 	 */
 	
-	private Date reserve_date;
+	@Column(name ="reserve_date")
+	private Date reserveDate;
 	
 	/*
 	 * メールアドレス

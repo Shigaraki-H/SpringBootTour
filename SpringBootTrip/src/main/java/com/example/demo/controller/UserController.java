@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.ReservationListRequest;
 import com.example.demo.entity.ReservationLists;
 import com.example.demo.entity.User;
+import com.example.demo.service.StaffService;
 import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,18 +36,45 @@ public class UserController {
    */
   	
   private final UserService userService;
+  
+  private final StaffService staffService;
+  
   /**
    * ユーザー情報一覧画面を表示
    * @param model Model
    * @return ユーザー情報一覧画面のHTML
    */
+  
+  //予約者一覧を表示する（ログインが必要）
   @RequestMapping(value = "/user/list", method = RequestMethod.GET)
   public String displayList(Model model) {
-    List<User> userlist = userService.searchAll();
+    List<ReservationLists> userlist = staffService.showUserInfoAll();
     model.addAttribute("userlist", userlist);
     return "user/list";
   }
   
+  @RequestMapping(value = "/search/asc", method = RequestMethod.GET)
+  public String searchAsc(Model model) {
+	  List<ReservationLists> userlist = staffService.getUsersBirthdayAsc();
+	  model.addAttribute("userlist", userlist);
+      return "user/list";
+  }
+
+  @RequestMapping(value = "/search/desc", method = RequestMethod.GET)
+  public String searchDesc(Model model) {
+	  List<ReservationLists> userlist = staffService.getUsersBirthdayDesc();
+	  model.addAttribute("userlist", userlist);
+      return "user/list";
+  }
+  
+  //選択した性別一覧を表示する（ログインが必要）
+  @RequestMapping(value = "/search/{gender}", method = RequestMethod.GET)
+  public String searchDesc(@RequestParam int gender,Model model) {
+	  List<ReservationLists> userlist = staffService.showGetUsersGender(gender);
+	  model.addAttribute("userlist", userlist);
+      return "user/list";
+  }
+
   /*
    * 予約画面の空き状況を表示
    */
