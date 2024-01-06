@@ -24,6 +24,8 @@ import com.example.demo.entity.User;
 import com.example.demo.service.StaffService;
 import com.example.demo.service.UserService;
 
+import com.example.demo.controller.UserController;
+
 import lombok.RequiredArgsConstructor;
 /**
  * ユーザー情報 Controller
@@ -38,6 +40,8 @@ public class UserController {
   private final UserService userService;
   
   private final StaffService staffService;
+  
+  private final MailController mailController;
   
   /**
    * ユーザー情報一覧画面を表示
@@ -154,6 +158,8 @@ public class UserController {
 	  
 	  //登録処理のメソッド
 	  userService.makeReserve(reservationListRequest, model);
+	  
+	  mailController.register(reservationListRequest);
 	  
     return "user/reserveCompleted";
   }
